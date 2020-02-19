@@ -4,18 +4,18 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Issues from "./containers/Issues";
+import Home from './containers/Home';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -49,12 +49,15 @@ const App: React.FC<Props> = () => {
             </AppBar>
             <div>
                 <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
                     <Route path="/issues">
                         <Issues />
                     </Route>
                 </Switch>
             </div>
-        </Router>
+        </Router >
     )
 }
 
