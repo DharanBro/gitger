@@ -5,6 +5,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import { CookiesProvider } from 'react-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -36,28 +37,33 @@ interface Props {
 const App: React.FC<Props> = () => {
     const classes = useStyles();
     return (
-        <Router>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        {"Gitger"}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <div>
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route path="/issues">
-                        <Issues />
-                    </Route>
-                </Switch>
-            </div>
-        </Router >
+        <CookiesProvider>
+            <Router>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                            {"Gitger"}
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <div>
+                    <Switch>
+                        <Route exact path="/">
+                            <Home />
+                        </Route>
+                        <Route exact path="/home">
+                            <Home />
+                        </Route>
+                        <Route path="/issues">
+                            <Issues />
+                        </Route>
+                    </Switch>
+                </div>
+            </Router >
+        </CookiesProvider>
     )
 }
 
