@@ -20,6 +20,7 @@ interface Props {
 interface Issue {
     number: number;
     title: string;
+    state:string;
     body: string;
     reporter: string;
     issueType: string;
@@ -41,6 +42,7 @@ const Issue: React.FC<Props> = ({ cookies }) => {
     const columnDefs = [
         { headerName: "Issue Number", field: "number" },
         { headerName: "Issue Title", field: "title" },
+        { headerName: "Issue Status", field: "status" },
         { headerName: "Description", field: "body" },
         { headerName: "Reported By", field: "reporter" },
         { headerName: "Issue Type", field: "issueType" },
@@ -128,6 +130,7 @@ const Issue: React.FC<Props> = ({ cookies }) => {
                             result.push({
                                 number: data.number,
                                 title: data.title,
+                                state: data.state,
                                 body: data.body,
                                 reporter: data.user.login,
                                 issueType: issueType,
