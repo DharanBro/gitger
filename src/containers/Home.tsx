@@ -5,6 +5,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Octokit } from "@octokit/rest";
+
+import {
+    Link
+  } from "react-router-dom";
 interface Props {
     cookies: any;
 }
@@ -93,16 +97,20 @@ const Home: React.FC<Props> = ({ cookies }) => {
 
     const renderHome = () => {
         return (
-            <p>Welcom Home, {user.name}</p>
+            <div>
+                <p>Welcom Home, {user.name}</p>
+
+                <Link to="/issues">Issues</Link>
+            </div>
         )
     }
 
 
-    if (!code && !cookeieToken) {
-        return renderLoginButton();
-    }
+if (!code && !cookeieToken) {
+    return renderLoginButton();
+}
 
-    return renderHome();
+return renderHome();
 
 
 }

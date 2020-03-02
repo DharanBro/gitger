@@ -4,6 +4,12 @@ import { Octokit } from "@octokit/rest";
 import { CSVDownload } from "react-csv";
 import { HEADERS, ISSUE_TYPES, ISSUE_STATUS } from "../constants/Issues"
 
+import {
+    BrowserRouter as Router,
+    Link,
+    useLocation
+  } from "react-router-dom";
+
 interface Props {
     cookies: any;
 }
@@ -109,12 +115,9 @@ const Issues: React.FC<Props> = ({ cookies }) => {
             repos.forEach(repo => {
                 table.push(
                     <tr>
-                        <td>{repo.name}</td>
-                        <td>{repo.url}</td>
+                        <td><Link to={`/issue?name=${repo.name}&full_name=${repo.full_name}`}> {repo.name}</Link></td>
+                        <td><a href={repo.url}> {repo.full_name}</a> </td>
                         <td>{repo.description}</td>
-                        <td>
-                            <button onClick={() => downloadIssue(repo.name, repo.full_name)} >Download {repo.name}</button>
-                        </td>
                     </tr>
                 )
             })

@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import Issue from "./containers/Issue";
 import Issues from "./containers/Issues";
 import Home from './containers/Home';
 
@@ -59,6 +60,9 @@ const App: React.FC<Props> = () => {
                         </Route>
                         <Route path="/issues">
                             <Issues />
+                        </Route>
+                        <Route path="/issue">
+                            <Issue />
                         </Route>
                     </Switch>
                 </div>
