@@ -15,8 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import Issues from "./containers/Issues";
-import Home from './containers/Home';
+import Issues from "./pages/Issues";
+import Home from './pages/Home';
+import Login from './pages/Login';
+import PrivateRoute from './components/PrivateRoute';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,15 +53,12 @@ const App: React.FC<Props> = () => {
                 </AppBar>
                 <div>
                     <Switch>
-                        <Route exact path="/">
-                            <Home />
+                        <PrivateRoute exact path="/" component={Home} />
+                        <Route path="/login">
+                            <Login />
                         </Route>
-                        <Route exact path="/home">
-                            <Home />
-                        </Route>
-                        <Route path="/issues">
-                            <Issues />
-                        </Route>
+                        <PrivateRoute exact path="/home" component={Home} />
+                        <PrivateRoute exact path="/issues" component={Issues} />
                     </Switch>
                 </div>
             </Router >
