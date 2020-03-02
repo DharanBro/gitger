@@ -42,7 +42,7 @@ const Issue: React.FC<Props> = ({ cookies }) => {
     const columnDefs = [
         { headerName: "Issue Number", field: "number" },
         { headerName: "Issue Title", field: "title" },
-        { headerName: "Issue Status", field: "status" },
+        { headerName: "Issue Status", field: "state" },
         { headerName: "Description", field: "body" },
         { headerName: "Reported By", field: "reporter" },
         { headerName: "Issue Type", field: "issueType" },
