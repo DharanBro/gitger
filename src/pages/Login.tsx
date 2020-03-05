@@ -4,8 +4,8 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { Button } from '@material-ui/core';
 import useStyles from '../styles';
 import { useLocation, Redirect } from "react-router-dom";
-import Github from '../services/Github';
 import { isAuthenticated } from '../utils/utils'
+import { useService } from '../components/ServiceProvider';
 
 interface Props {
     cookies: any;
@@ -26,15 +26,17 @@ const Login: React.FC<Props> = ({ cookies }) => {
     const classes = useStyles();
     let query = useQuery();
     const code = query.get("code");
+    const service = useService();
 
     if (code && loginStatus === 'LOGGED_OUT') {
         setLoginStatus('LOGGING_IN')
-        Github.authenticate(code, cookies, (token) => {
+        service.authenticate(code, cookies, (token) => {
             if (!token || typeof token in Error) {
                 setLoginStatus('FAILED');
                 return;
             }
             cookies.set('token', token, { path: '/' });
+            service.initiate(token);
             setLoginStatus('SUCCESS');
         })
     }
@@ -51,7 +53,7 @@ const Login: React.FC<Props> = ({ cookies }) => {
     );
 
     const render = () => {
-        if (isAuthenticated(cookies)) {
+        if (isAuthenticated(service, cookies)) {
             return <Redirect to='/home' />
         }
         if (loginStatus === 'LOGGED_OUT') {

@@ -1,4 +1,10 @@
-export const isAuthenticated = (cookies: any) => {
+import Github from "../services/Github";
+
+export const isAuthenticated = (service: Github, cookies: any) => {
     let cookeieToken = cookies.get("token");
-    return (cookeieToken === "undefined" || cookeieToken === undefined) ? false : true;
+    if (cookeieToken === "undefined" || cookeieToken === undefined) {
+        return false;
+    }
+    service.initiate(cookeieToken);
+    return true;
 }
