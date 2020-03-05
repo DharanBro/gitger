@@ -53,7 +53,7 @@ const Login: React.FC<Props> = ({ cookies }) => {
     );
 
     const render = () => {
-        if (isAuthenticated(cookies)) {
+        if (isAuthenticated(service, cookies)) {
             return <Redirect to='/home' />
         }
         if (loginStatus === 'LOGGED_OUT') {
